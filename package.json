@@ -10,7 +10,7 @@
     "sequelize": "^6.17.0"
   },
   "scripts": {
-    "start": "node src/index.ts"
+    "start": "node src/index.js"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",

@@ -1,4 +1,4 @@
-const db = require("../models/index.js");
+const db = require("../models");
 const config = require("../config/auth.config");
 const user = db.user;
 const Op = db.Sequelize.Op;

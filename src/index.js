@@ -1,7 +1,7 @@
 const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
-const chalk = require('chalk');
+// const chalk = require('chalk');
 
 const app = express();
 app.use(express.json());  /* bodyParser.json() is deprecated */
@@ -24,10 +24,9 @@ app.get("/", (req, res) => {
 // require('./routes/user')(app);
 
 // set port, listen for requests
-const PORT =  8080;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}.`);
     console.log('--------------------------');
-    console.log(chalk.green("Host:")+ process.env.HOST);
-    console.log(chalk.green("Username:") + process.env.USER);
+    // console.log(chalk.green("Host:")+ process.env.HOST);
+    // console.log(chalk.green("Username:") + process.env.USER);
 });
