@@ -11,10 +11,6 @@ app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is
 
 const db = require("./models");
 db.sequelize.sync();
-// drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
 
 // simple route
 app.get("/", (req, res) => {
@@ -22,11 +18,12 @@ app.get("/", (req, res) => {
 });
 
 require('./routes/auth')(app);
+require('./routes/user')(app);
 
 // set port, listen for requests
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}.`);
     console.log('--------------------------');
-    console.log(chalk.green("Host:")+ process.env.HOST);
-    console.log(chalk.green("Username:") + process.env.USER);
+    console.log(chalk.green("Host : ")+ process.env.HOST);
+    console.log(chalk.green("Username : ") + process.env.USER);
 });

@@ -1,5 +1,5 @@
 // const {verifySignUp} = require("../middleware");
-const controller = require("../controllers/auth");
+const authController = require("../controllers/auth");
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -11,9 +11,8 @@ module.exports = function (app) {
     });
 
     app.route("/api/auth/signup")
-        .post(controller.signup)
+        .post(authController.signup)
 
     app.route("/api/auth/signin")
-        .post(controller.signin)
-
+        .post(authController.signin)
 };
