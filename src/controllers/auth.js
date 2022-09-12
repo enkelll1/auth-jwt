@@ -1,23 +1,28 @@
 const db = require("../models");
-const config = require("../config/auth.config");
 const user = db.user;
 const Op = db.Sequelize.Op;
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
     // Save User to Database
-    User.create({
+    user.create({
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
+    }).then((user)=>{
+        res.status(200).send({
+            id: user.id,
+            username: user.username,
+            email: user.email,
+        });
     }).catch(err => {
             res.status(500).send({message: err.message});
         });
 };
 
 exports.signin = (req, res) => {
-    User.findOne({
+    user.findOne({
         where: {
             username: req.body.username
         }
@@ -39,7 +44,7 @@ exports.signin = (req, res) => {
                 });
             }
 
-            const token = jwt.sign({id: user.id}, config.secret, {
+            const token = jwt.sign({id: user.id}, process.env.jwt_config, {
                 expiresIn: 3600 // 24 hours
             });
             res.status(200).send({
