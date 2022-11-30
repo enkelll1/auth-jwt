@@ -4,7 +4,6 @@ const Op = db.Sequelize.Op;
 
 exports.getAll = async (req, res) => {
     try {
-        console.log('a');
         const users = await userDb.findAll();
         res.status(200).send({
             users: users
@@ -16,8 +15,6 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
     try {
-        console.log('b');
-        console.log(req.params.id)
         const user = await userDb.findOne({
             where: {
                 id: req.params.id
